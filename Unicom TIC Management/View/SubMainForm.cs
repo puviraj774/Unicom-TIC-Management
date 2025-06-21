@@ -71,5 +71,19 @@ namespace Unicom_TIC_Management.View
         {
             FormLoad.LoadIntoPanel(new ViewOwnMarks(_UserId), pnlcenter);
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            FormLoad.LoadIntoPanel(new ProfileForm(_UserId, _Role, _Username, _Password), pnlcenter);
+        }
+
+        private void logoutbtn_Click(object sender, EventArgs e)
+        {
+            var confirm = MessageBox.Show("Are you sure to Logout.", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirm == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
     }
 }

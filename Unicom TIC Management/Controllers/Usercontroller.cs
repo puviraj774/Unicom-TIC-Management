@@ -15,13 +15,13 @@ namespace Unicom_TIC_Management.Controllers
     {
         public void AddAdmin(User user)
         {
-            using ( var connection = DB_Connection.GetConnection() )
+            using (var connection = DB_Connection.GetConnection())
             {
                 string UserQuery = "INSERT INTO Users(Username,Password,Role) VALUES (@username,@password,@role)";
 
-                SQLiteCommand command = new SQLiteCommand( UserQuery, connection );
+                SQLiteCommand command = new SQLiteCommand(UserQuery, connection);
                 command.Parameters.AddWithValue("@username", user.Username);
-                command.Parameters.AddWithValue("@password",user.Password);
+                command.Parameters.AddWithValue("@password", user.Password);
                 command.Parameters.AddWithValue("@role", "Admin");
                 command.ExecuteNonQuery();
 
@@ -56,7 +56,7 @@ namespace Unicom_TIC_Management.Controllers
             return null;
         }
 
-        
+
         public static User GetUserById(int id)
         {
             using (var conn = DB_Connection.GetConnection())
@@ -81,6 +81,18 @@ namespace Unicom_TIC_Management.Controllers
             }
             return null;
         }
-
+        public static void ChangePassword(int userId, string newPassword)
+        {
+            using (var connection = DB_Connection.GetConnection())
+            {
+                string query = "UPDATE Users SET Password = @password WHERE ID = @id";
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@password", newPassword);
+                    command.Parameters.AddWithValue("@id", userId);
+                    command.ExecuteNonQuery();
+                }
+            }           
+        }
     }
 }

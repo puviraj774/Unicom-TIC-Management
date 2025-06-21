@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SubMainForm));
             this.pnldown = new System.Windows.Forms.Panel();
             this.btnmarksmanagement = new System.Windows.Forms.Button();
             this.btnexammanagement = new System.Windows.Forms.Button();
@@ -37,13 +38,18 @@
             this.pnlup = new System.Windows.Forms.Panel();
             this.labelhead = new System.Windows.Forms.Label();
             this.pnlcenter = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.logoutbtn = new System.Windows.Forms.Button();
             this.pnldown.SuspendLayout();
             this.pnlup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnldown
             // 
             this.pnldown.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnldown.Controls.Add(this.logoutbtn);
+            this.pnldown.Controls.Add(this.pictureBox1);
             this.pnldown.Controls.Add(this.btnmarksmanagement);
             this.pnldown.Controls.Add(this.btnexammanagement);
             this.pnldown.Controls.Add(this.btnviewmarks);
@@ -59,7 +65,7 @@
             // 
             this.btnmarksmanagement.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnmarksmanagement.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnmarksmanagement.Location = new System.Drawing.Point(12, 418);
+            this.btnmarksmanagement.Location = new System.Drawing.Point(12, 454);
             this.btnmarksmanagement.Name = "btnmarksmanagement";
             this.btnmarksmanagement.Size = new System.Drawing.Size(192, 60);
             this.btnmarksmanagement.TabIndex = 4;
@@ -71,7 +77,7 @@
             // 
             this.btnexammanagement.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnexammanagement.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnexammanagement.Location = new System.Drawing.Point(12, 339);
+            this.btnexammanagement.Location = new System.Drawing.Point(12, 375);
             this.btnexammanagement.Name = "btnexammanagement";
             this.btnexammanagement.Size = new System.Drawing.Size(192, 60);
             this.btnexammanagement.TabIndex = 3;
@@ -83,7 +89,7 @@
             // 
             this.btnviewmarks.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnviewmarks.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnviewmarks.Location = new System.Drawing.Point(12, 264);
+            this.btnviewmarks.Location = new System.Drawing.Point(12, 300);
             this.btnviewmarks.Name = "btnviewmarks";
             this.btnviewmarks.Size = new System.Drawing.Size(192, 60);
             this.btnviewmarks.TabIndex = 2;
@@ -95,7 +101,7 @@
             // 
             this.btnviewclass.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnviewclass.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnviewclass.Location = new System.Drawing.Point(12, 189);
+            this.btnviewclass.Location = new System.Drawing.Point(12, 225);
             this.btnviewclass.Name = "btnviewclass";
             this.btnviewclass.Size = new System.Drawing.Size(192, 60);
             this.btnviewclass.TabIndex = 1;
@@ -107,7 +113,7 @@
             // 
             this.btnviewexam.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnviewexam.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnviewexam.Location = new System.Drawing.Point(12, 104);
+            this.btnviewexam.Location = new System.Drawing.Point(12, 140);
             this.btnviewexam.Name = "btnviewexam";
             this.btnviewexam.Size = new System.Drawing.Size(192, 60);
             this.btnviewexam.TabIndex = 0;
@@ -144,6 +150,28 @@
             this.pnlcenter.Size = new System.Drawing.Size(803, 669);
             this.pnlcenter.TabIndex = 2;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(48, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(112, 100);
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // logoutbtn
+            // 
+            this.logoutbtn.BackColor = System.Drawing.Color.Red;
+            this.logoutbtn.Location = new System.Drawing.Point(129, 724);
+            this.logoutbtn.Name = "logoutbtn";
+            this.logoutbtn.Size = new System.Drawing.Size(75, 33);
+            this.logoutbtn.TabIndex = 14;
+            this.logoutbtn.Text = "Logout";
+            this.logoutbtn.UseVisualStyleBackColor = false;
+            this.logoutbtn.Click += new System.EventHandler(this.logoutbtn_Click);
+            // 
             // SubMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -158,6 +186,7 @@
             this.pnldown.ResumeLayout(false);
             this.pnlup.ResumeLayout(false);
             this.pnlup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -173,5 +202,7 @@
         private System.Windows.Forms.Button btnviewclass;
         private System.Windows.Forms.Button btnviewexam;
         private System.Windows.Forms.Button btnmarksmanagement;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button logoutbtn;
     }
 }

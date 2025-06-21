@@ -32,7 +32,7 @@ namespace Unicom_TIC_Management.View
         }
         private void profilebtn_Click(object sender, EventArgs e)
         {
-
+           
         }
 
         private void coursemanagementbtn_Click(object sender, EventArgs e)
@@ -88,6 +88,11 @@ namespace Unicom_TIC_Management.View
         private void attendencemanagementbtn_Click(object sender, EventArgs e)
         {
             FormLoad.LoadIntoPanel(new AttendanceForm(), mainpanel);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            FormLoad.LoadIntoPanel(new ProfileForm(_userId, _role, _username, _password), mainpanel);
         }
     }
 }

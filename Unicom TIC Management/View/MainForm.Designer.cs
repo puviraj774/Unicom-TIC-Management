@@ -43,17 +43,19 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.profilebtn = new System.Windows.Forms.Button();
             this.toppanel = new System.Windows.Forms.Panel();
             this.dashboardlabel = new System.Windows.Forms.Label();
             this.mainpanel = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.leftpanel.SuspendLayout();
             this.toppanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // leftpanel
             // 
             this.leftpanel.BackColor = System.Drawing.Color.DarkGray;
+            this.leftpanel.Controls.Add(this.pictureBox1);
             this.leftpanel.Controls.Add(this.logoutbtn);
             this.leftpanel.Controls.Add(this.marksmanagementbtn);
             this.leftpanel.Controls.Add(this.attendencemanagementbtn);
@@ -67,7 +69,6 @@
             this.leftpanel.Controls.Add(this.label3);
             this.leftpanel.Controls.Add(this.label2);
             this.leftpanel.Controls.Add(this.label1);
-            this.leftpanel.Controls.Add(this.profilebtn);
             this.leftpanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftpanel.Location = new System.Drawing.Point(0, 0);
             this.leftpanel.Name = "leftpanel";
@@ -214,18 +215,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Core Management";
             // 
-            // profilebtn
-            // 
-            this.profilebtn.BackColor = System.Drawing.Color.DarkGray;
-            this.profilebtn.Font = new System.Drawing.Font("Times New Roman", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.profilebtn.Location = new System.Drawing.Point(59, 24);
-            this.profilebtn.Name = "profilebtn";
-            this.profilebtn.Size = new System.Drawing.Size(173, 38);
-            this.profilebtn.TabIndex = 0;
-            this.profilebtn.Text = "Profile";
-            this.profilebtn.UseVisualStyleBackColor = false;
-            this.profilebtn.Click += new System.EventHandler(this.profilebtn_Click);
-            // 
             // toppanel
             // 
             this.toppanel.BackColor = System.Drawing.Color.LightGray;
@@ -257,6 +246,17 @@
             this.mainpanel.Size = new System.Drawing.Size(727, 634);
             this.mainpanel.TabIndex = 2;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(117, 24);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(112, 100);
+            this.pictureBox1.TabIndex = 14;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -272,6 +272,7 @@
             this.leftpanel.PerformLayout();
             this.toppanel.ResumeLayout(false);
             this.toppanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -281,7 +282,6 @@
         private System.Windows.Forms.Panel leftpanel;
         private System.Windows.Forms.Panel toppanel;
         private System.Windows.Forms.Panel mainpanel;
-        private System.Windows.Forms.Button profilebtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -296,5 +296,6 @@
         private System.Windows.Forms.Button marksmanagementbtn;
         private System.Windows.Forms.Button attendencemanagementbtn;
         private System.Windows.Forms.Label dashboardlabel;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
