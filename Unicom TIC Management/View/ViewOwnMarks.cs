@@ -14,11 +14,11 @@ namespace Unicom_TIC_Management.View
 {
     public partial class ViewOwnMarks : Form
     {
-        private int _UserId;
+        private int StudentId;
         public ViewOwnMarks(int id)
         {
             InitializeComponent();
-            _UserId = id;
+            StudentId = id;
         }
 
         private void ViewOwnMarks_Load(object sender, EventArgs e)
@@ -27,15 +27,8 @@ namespace Unicom_TIC_Management.View
         }
         private void LoadMarksForStudent()
         {
-            int? studentId = Markcontroller.GetStudentIdByUserId(_UserId);
 
-            if (studentId == null)
-            {
-                MessageBox.Show("Student record not found for this user.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            var marks = Markcontroller.GetMarksByStudentId(studentId.Value);
+            var marks = Markcontroller.GetMarksByStudentId(StudentId);
 
             dgvOwnMarks.DataSource = marks;
 

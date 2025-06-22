@@ -74,6 +74,7 @@ namespace Unicom_TIC_Management.View
                 return false;
             }
 
+
             return true;
         }
         private bool IsValidNIC(string nic)
@@ -84,6 +85,11 @@ namespace Unicom_TIC_Management.View
         }
         private void btnadd_Click(object sender, EventArgs e)
         {
+            if (Usercontroller.IsNICUsed(txtnic.Text))
+            {
+                MessageBox.Show("NIC already exists in system.");
+                return;
+            }
             if (!ValidateForm()) return;
 
             var student = new Student
@@ -125,6 +131,11 @@ namespace Unicom_TIC_Management.View
 
         private void btnedit_Click(object sender, EventArgs e)
         {
+            if (Usercontroller.IsNICUsedByOthers(txtnic.Text.Trim(), "Students", selectedStudentId))
+            {
+                MessageBox.Show("NIC already exists in system.");
+                return;
+            }
             if (selectedStudentId == -1 || !ValidateForm()) return;
 
             var updated = new Student

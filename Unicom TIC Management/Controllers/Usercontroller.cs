@@ -81,6 +81,7 @@ namespace Unicom_TIC_Management.Controllers
             }
             return null;
         }
+
         public static void ChangePassword(int userId, string newPassword)
         {
             using (var connection = DB_Connection.GetConnection())
@@ -94,5 +95,52 @@ namespace Unicom_TIC_Management.Controllers
                 }
             }           
         }
+        public static bool IsNICUsedByOthers(string nic, string currentTable, int currentId)
+        {
+            using (var conn = DB_Connection.GetConnection())
+            {
+                string query = @"
+            SELECT 'Students' FROM Students WHERE NIC = @nic AND (@tbl != 'Students' OR ID != @id)
+            UNION
+            SELECT 'Staff' FROM Staff WHERE NIC = @nic AND (@tbl != 'Staff' OR ID != @id)
+            UNION
+            SELECT 'Lecturers' FROM Lecturers WHERE NIC = @nic AND (@tbl != 'Lecturers' OR ID != @id)";
+
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@nic", nic);
+                    cmd.Parameters.AddWithValue("@tbl", currentTable);
+                    cmd.Parameters.AddWithValue("@id", currentId);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        return reader.HasRows;
+                    }
+                }
+            }
+        }
+        public static bool IsNICUsed(string nic)
+        {
+            using (var conn = DB_Connection.GetConnection())
+            {
+                string query = @"
+            SELECT NIC FROM Students WHERE NIC = @nic
+            UNION
+            SELECT NIC FROM Staff WHERE NIC = @nic
+            UNION
+            SELECT NIC FROM Lecturers WHERE NIC = @nic";
+
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@nic", nic);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        return reader.HasRows;
+                    }
+                }
+            }
+        }
+
+
+
     }
 }

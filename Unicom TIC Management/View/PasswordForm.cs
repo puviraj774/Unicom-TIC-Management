@@ -33,6 +33,22 @@ namespace Unicom_TIC_Management.View
 
         private void btnchange_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtold.Text) || string.IsNullOrWhiteSpace(txtnew.Text) || string.IsNullOrWhiteSpace(txtconfirm.Text))
+            {
+                MessageBox.Show("Please fill in all fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (txtold.Text == txtnew.Text)
+            {
+                MessageBox.Show("New password cannot be the same as old password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (txtold.Text != _password)
+            {
+                MessageBox.Show("Old password is incorrect.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (txtold.Text == _password)
             {
                 if (txtnew.Text == txtconfirm.Text)

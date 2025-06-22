@@ -53,19 +53,19 @@ namespace Unicom_TIC_Management.View
                 else if (user.Role == "Student")
                 {
                     int studentId = new Studentcontroller().GetStudentIdByUserId(user.Id);
-                    new SubMainForm(studentId,user.Role, username, password).ShowDialog();
+                    new SubMainForm(studentId,user.Id,user.Role, username, password).ShowDialog();
                     this.Close();
                 }
                 else if (user.Role == "Lecturer")
                 {
                     int lecturerId = new Lecturercontroller().GetLecturerIdByUserId(user.Id);
-                    new SubMainForm(lecturerId, user.Role, username, password).ShowDialog();
+                    new SubMainForm(lecturerId, user.Id, user.Role, username, password).ShowDialog();
                     this.Close();
                 }
                 else if (user.Role == "Staff")
                 {
                     int staffId = new Staffcontroller().GetStaffIdByUserId(user.Id);
-                    new SubMainForm(staffId, user.Role, username, password).ShowDialog();
+                    new SubMainForm(staffId, user.Id, user.Role, username, password).ShowDialog();
                     this.Close();
                 }
 

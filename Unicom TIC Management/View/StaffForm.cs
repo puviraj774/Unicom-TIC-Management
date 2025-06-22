@@ -70,6 +70,11 @@ namespace Unicom_TIC_Management.View
 
         private void btnadd_Click(object sender, EventArgs e)
         {
+            if (Usercontroller.IsNICUsed(txtnic.Text))
+            {
+                MessageBox.Show("NIC already exists in system.");
+                return;
+            }
 
             if (string.IsNullOrWhiteSpace(txtname.Text) ||
                 string.IsNullOrWhiteSpace(txtnic.Text) ||
@@ -141,6 +146,11 @@ namespace Unicom_TIC_Management.View
 
         private void btnedit_Click(object sender, EventArgs e)
         {
+            if (Usercontroller.IsNICUsedByOthers(txtnic.Text.Trim(), "Staff", selectedStaffId))
+            {
+                MessageBox.Show("NIC already exists in system.");
+                return;
+            }
             if (string.IsNullOrWhiteSpace(txtname.Text) ||
                 string.IsNullOrWhiteSpace(txtnic.Text) ||
                 string.IsNullOrWhiteSpace(txtusername.Text) ||

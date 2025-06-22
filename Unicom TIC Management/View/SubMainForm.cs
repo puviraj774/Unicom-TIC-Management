@@ -13,14 +13,16 @@ namespace Unicom_TIC_Management.View
 {
     public partial class SubMainForm : Form
     {
-        private int _UserId;
+        private int _Id;
+        private int _UserID;
         private string _Role;
         private string _Username;
         private string _Password;
-        public SubMainForm(int userId, string role, string username, string password)
+        public SubMainForm(int Id,int userid, string role, string username, string password)
         {
             InitializeComponent();
-            _UserId = userId;
+            _Id = Id;
+            _UserID = userid;
             _Role = role;
             _Username = username;
             _Password = password;
@@ -54,7 +56,7 @@ namespace Unicom_TIC_Management.View
 
         private void btnexammanagement_Click(object sender, EventArgs e)
         {
-            FormLoad.LoadIntoPanel(new ExamForm(), pnlcenter);
+            FormLoad.LoadIntoPanel(new ExamTimetableForm(), pnlcenter);
         }
 
         private void btnmarksmanagement_Click(object sender, EventArgs e)
@@ -69,12 +71,12 @@ namespace Unicom_TIC_Management.View
 
         private void btnviewmarks_Click(object sender, EventArgs e)
         {
-            FormLoad.LoadIntoPanel(new ViewOwnMarks(_UserId), pnlcenter);
+            FormLoad.LoadIntoPanel(new ViewOwnMarks(_Id), pnlcenter);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            FormLoad.LoadIntoPanel(new ProfileForm(_UserId, _Role, _Username, _Password), pnlcenter);
+            FormLoad.LoadIntoPanel(new ProfileForm(_UserID, _Role, _Username, _Password), pnlcenter);
         }
 
         private void logoutbtn_Click(object sender, EventArgs e)

@@ -12,14 +12,14 @@ namespace Unicom_TIC_Management.View
 {
     public partial class ProfileForm : Form
     {
-        private int _userId;
+        private int ID;
         private string _role;
         private string _username;
         private string _password;
-        public ProfileForm(int userId, string role, string username, string password)
+        public ProfileForm(int Id, string role, string username, string password)
         {
             InitializeComponent();
-            _userId = userId;
+            ID = Id;
             _role = role;
             _username = username;
             _password = password;
@@ -59,7 +59,7 @@ namespace Unicom_TIC_Management.View
 
         private void btnchange_Click(object sender, EventArgs e)
         {
-            PasswordForm passwordForm = new PasswordForm(_userId, _role, _username, _password);
+            PasswordForm passwordForm = new PasswordForm(ID, _role, _username, _password);
             passwordForm.ShowDialog();
         }
     }

@@ -70,6 +70,11 @@ namespace Unicom_TIC_Management.View
 
         private void btnadd_Click(object sender, EventArgs e)
         {
+            if (Usercontroller.IsNICUsed(txtnic.Text))
+            {
+                MessageBox.Show("NIC already exists in system.");
+                return;
+            }
             if (string.IsNullOrWhiteSpace(txtname.Text) ||
             string.IsNullOrWhiteSpace(txtnic.Text) ||
             string.IsNullOrWhiteSpace(txtusername.Text) ||
@@ -188,6 +193,11 @@ namespace Unicom_TIC_Management.View
             if (!IsValidNIC(nic))
             {
                 MessageBox.Show("Invalid NIC number. Please enter a valid NIC.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (Usercontroller.IsNICUsedByOthers(txtnic.Text.Trim(),"Lecturers",selectedlecturerid))
+            {
+                MessageBox.Show("NIC already exists in system.");
                 return;
             }
 

@@ -59,12 +59,30 @@ namespace Unicom_TIC_Management.Controllers
         {
             using (var conn = DB_Connection.GetConnection())
             {
-                string examQuery = "SELECT Date FROM ExamTimetable WHERE ID = @id";
+                // 🔎 Step 1: Check duplicate mark
+                string checkExistQuery = @"SELECT COUNT(*) FROM Marks 
+                                   WHERE StudentID = @sid AND ExamTimetableID = @etid";
 
+                using (var checkCmd = new SQLiteCommand(checkExistQuery, conn))
+                {
+                    checkCmd.Parameters.AddWithValue("@sid", mark.StudentId);
+                    checkCmd.Parameters.AddWithValue("@etid", mark.ExamTimetableId);
+
+                    long existingCount = (long)checkCmd.ExecuteScalar();
+                    if (existingCount > 0)
+                    {
+                        MessageBox.Show("Mark already added for this student in this exam.", "Duplicate Entry");
+                        return false;
+                    }
+                }
+
+                // 🔎 Step 2: Get exam date
+                string examQuery = "SELECT Date FROM ExamTimetable WHERE ID = @id";
                 using (var examCmd = new SQLiteCommand(examQuery, conn))
                 {
                     examCmd.Parameters.AddWithValue("@id", mark.ExamTimetableId);
                     var examDateObj = examCmd.ExecuteScalar();
+
                     if (examDateObj == null)
                     {
                         MessageBox.Show("Invalid exam timetable.", "Error");
@@ -73,11 +91,15 @@ namespace Unicom_TIC_Management.Controllers
 
                     DateTime examDate = Convert.ToDateTime(examDateObj);
 
-                    string attendanceQuery = @"SELECT Status FROM StudentAttendance WHERE StudentID = @sid AND Date = @date";
+                    // 🔎 Step 3: Check attendance
+                    string attendanceQuery = @"SELECT Status FROM StudentAttendance 
+                                       WHERE StudentID = @sid AND Date = @date";
+
                     using (var attendanceCmd = new SQLiteCommand(attendanceQuery, conn))
                     {
                         attendanceCmd.Parameters.AddWithValue("@sid", mark.StudentId);
                         attendanceCmd.Parameters.AddWithValue("@date", examDate.ToString("yyyy-MM-dd"));
+
                         var statusObj = attendanceCmd.ExecuteScalar();
 
                         if (statusObj == null || statusObj.ToString() != "Present")
@@ -87,7 +109,9 @@ namespace Unicom_TIC_Management.Controllers
                         }
                     }
 
-                    string insert = @"INSERT INTO Marks (StudentID, ExamTimetableID, Score) VALUES (@sid, @etid, @score)";
+                    // ✅ Step 4: Insert mark
+                    string insert = @"INSERT INTO Marks (StudentID, ExamTimetableID, Score) 
+                              VALUES (@sid, @etid, @score)";
                     using (var cmd = new SQLiteCommand(insert, conn))
                     {
                         cmd.Parameters.AddWithValue("@sid", mark.StudentId);
@@ -98,6 +122,7 @@ namespace Unicom_TIC_Management.Controllers
                 }
             }
         }
+
 
         public static bool EditMark(Mark mark)
         {
@@ -147,25 +172,26 @@ namespace Unicom_TIC_Management.Controllers
             using (var conn = DB_Connection.GetConnection())
             {
                 string query = @"
-            SELECT 
-                m.ID,
-                m.StudentID,
-                s.Name AS StudentName,
-                m.ExamTimetableID,
-                e.Name AS ExamName,
-                et.SubjectID,
-                sub.Name AS SubjectName,
-                m.Score
-            FROM Marks m
-            JOIN Students s ON m.StudentID = s.ID
-            JOIN ExamTimetable et ON m.ExamTimetableID = et.ID
-            JOIN Exams e ON et.ExamID = e.ID
-            JOIN Subjects sub ON et.SubjectID = sub.ID
-            WHERE m.StudentID = @studentId";
+                                SELECT 
+                                    m.ID,
+                                    m.StudentID,
+                                    s.Name AS StudentName,
+                                    m.ExamTimetableID,
+                                    e.Name AS ExamName,
+                                    et.SubjectID,
+                                    sub.Name AS SubjectName,
+                                    m.Score
+                                FROM Marks m
+                                JOIN Students s ON m.StudentID = s.ID
+                                JOIN ExamTimetable et ON m.ExamTimetableID = et.ID
+                                JOIN Exams e ON et.ExamID = e.ID
+                                JOIN Subjects sub ON et.SubjectID = sub.ID
+                                WHERE m.StudentID = @studentId";
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@studentId", studentId);
+
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -187,7 +213,8 @@ namespace Unicom_TIC_Management.Controllers
             }
             return list;
         }
-        public static int? GetStudentIdByUserId(int userId)
+
+        public static int GetStudentIdByUserId(int userId)
         {
             using (var conn = DB_Connection.GetConnection())
             {
@@ -198,12 +225,17 @@ namespace Unicom_TIC_Management.Controllers
                     cmd.Parameters.AddWithValue("@userId", userId);
                     var result = cmd.ExecuteScalar();
 
-                    if (result != null && int.TryParse(result.ToString(), out int sid))
-                        return sid;
+                    if (result != null && int.TryParse(result.ToString(), out int studentId))
+                    {
+                        return studentId;
+                    }
                 }
             }
-            return null; 
+
+            // If not found, you can return -1 or throw an exception
+            return -1;
         }
+
 
     }
 }

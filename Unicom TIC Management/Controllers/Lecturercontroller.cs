@@ -19,6 +19,7 @@ namespace Unicom_TIC_Management.Controllers
             {
                 try
                 {
+                    
                     string addUser = "INSERT INTO Users (Username, Password, Role) VALUES (@username, @password, @role)";
                     using (var cmd = new SQLiteCommand(addUser, conn, transaction))
                     {
