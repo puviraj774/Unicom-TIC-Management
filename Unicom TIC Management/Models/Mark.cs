@@ -11,13 +11,10 @@ namespace Unicom_TIC_Management.Models
         public int Id { get; set; }
         public int StudentId { get; set; }
         public string StudentName { get; set; }
-
-        public int ExamTimetableId { get; set; }  // Correct FK
+        public int ExamTimetableId { get; set; }  
         public string ExamName { get; set; }
-
         public int SubjectId { get; set; }
         public string SubjectName { get; set; }
-
         public int Score { get; set; }
     }
 }
