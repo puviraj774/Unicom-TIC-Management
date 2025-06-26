@@ -36,6 +36,7 @@ namespace Unicom_TIC_Management.View
             dgvexam.Columns["Name"].HeaderText = "Exam Name";
             selectedId = -1;
             btndelete.Enabled = false;
+
         }
 
         private void btnadd_Click(object sender, EventArgs e)
@@ -51,6 +52,8 @@ namespace Unicom_TIC_Management.View
                 MessageBox.Show("Exam name added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtexam.Clear();
                 LoadGrid();
+                ExamTimetableForm examTimetableForm = new ExamTimetableForm();
+                examTimetableForm.LoadExamNames();
             }
         }
 

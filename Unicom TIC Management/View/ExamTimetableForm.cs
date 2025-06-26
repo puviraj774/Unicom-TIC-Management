@@ -28,7 +28,7 @@ namespace Unicom_TIC_Management.View
             LoadGrid();
             ClearForm();
         }
-        private void LoadExamNames()
+        public void LoadExamNames()
         {
             cobexam.DataSource = Examcontroller.GetAll();
             cobexam.DisplayMember = "Name";
